@@ -1,0 +1,624 @@
+/* 重置样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: rgb(237, 236, 232);
+    color: rgb(98, 85, 72);
+}
+
+/* 导航栏样式 */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgb(237, 236, 232);
+    border-bottom: 1px solid transparent;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* 添加中间的横线 */
+.nav-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgb(98, 85, 72);
+    z-index: 1;
+}
+
+/* 确保logo和导航链接在横线上层 */
+.logo {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(237, 236, 232);
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.logo img {
+    height: 100%;
+    width: auto;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background-color: rgb(237, 236, 232);
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+}
+
+.nav-links a {
+    color: #666;
+    text-decoration: none;
+    font-size: 1.1rem;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+}
+
+.nav-links a:not(:last-child)::after {
+    content: "/";
+    position: absolute;
+    right: -1.2rem;
+    color: #999;
+}
+
+.nav-links a:hover {
+    color: #333;
+}
+
+/* 英雄区域样式 */
+.hero-section {
+    min-height: 100vh;
+    padding-top: 80px; /* 为固定导航栏留出空间 */
+    background-color: rgb(237, 236, 232);
+}
+
+.hero-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+    display: flex;
+    flex-direction: row-reverse;  /* 改变flex方向，使图片在右边 */
+    gap: 2rem;
+    align-items: center;
+    height: calc(100vh - 80px);
+}
+
+.hero-image {
+    flex: 2;    /* 改为2，使图片占据三分之二的空间 */
+    height: 80%;  /* 从100%减少到80% */
+}
+
+.hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero-content {
+    flex: 1;    /* 保持为1，使文字占据三分之一的空间 */
+    text-align: center;
+    padding: 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    line-height: 1.2;
+    color: rgb(98, 85, 72);
+}
+
+.hero-content p {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.cta-button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: transparent;
+    border: 2px solid white;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.cta-button:hover {
+    background: white;
+    color: black;
+}
+
+/* 新闻区域样式 */
+/* 删除新闻区域和音乐区域的相关样式 */
+/* 删除以下部分：
+.news-section
+.news-grid
+.news-card
+.music-section
+.music-grid
+相关的样式 */
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .hero-container {
+        flex-direction: column;  /* 在移动端保持图片在上文字在下 */
+        height: auto;
+    }
+
+    .hero-image {
+        width: 100%;
+        height: 50vh;
+    }
+
+    .hero-content {
+        padding: 2rem 1rem;
+    }
+
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+}
+
+.arrive-button {
+    display: inline-block;
+    position: relative;
+    margin-top: 2rem;
+    padding: 0.6rem 4rem;    /* 减小高度，增加宽度 */
+    border: 1px solid rgb(98, 85, 72);
+    color: rgb(98, 85, 72);
+    text-decoration: none;
+    font-size: 1.3rem;      /* 增大字体 */
+    font-weight: 600;       /* 加粗字体 */
+    letter-spacing: 3px;    /* 增加字母间距 */
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.button-text {
+    position: relative;
+    z-index: 2;
+}
+
+.button-overlay {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(98, 85, 72, 0.1);
+    transition: left 0.8s ease;   /* 增加动画时间从0.3s到0.8s */
+    z-index: 1;
+}
+
+.arrive-button:hover .button-overlay {
+    left: 0;
+}
+
+/* 在响应式部分调整按钮的移动端样式 */
+@media (max-width: 768px) {
+    .arrive-button {
+        padding: 0.5rem 3.5rem;   /* 调整移动端下的内边距 */
+        font-size: 1.2rem;        /* 调整移动端下的字体大小 */
+    }
+}
+
+/* Tale部分样式 */
+.tale-section {
+    padding: 6rem 0;
+    background-color: rgb(237, 236, 232);
+}
+
+.tale-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 30px;
+}
+
+.tale-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;  /* 从4rem减少到2rem */
+}
+
+.tale-header h2 {
+    font-size: 3.5rem;
+    font-weight: 400;  /* 减小字体粗细 */
+    color: rgb(98, 85, 72);
+    margin-right: 2rem;
+}
+
+.tale-line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: rgb(98, 85, 72);
+    margin-top: 1.8rem; /* 调整线与Tale文字上对齐 */
+}
+
+.tale-window {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* 修改进度条样式 */
+.tale-progress {
+    display: none;  /* 隐藏滚动条 */
+}
+
+.tale-progress-bar {
+    display: none;  /* 隐藏滚动条进度条 */
+}
+
+.tale-grid {
+    display: flex;
+    gap: 2rem; /* 32px */
+    width: max-content;
+    transform: translateX(0);
+    transition: transform 0.3s ease;
+}
+
+.tale-image {
+    width: 100%;
+    margin-bottom: 2rem;     /* 减小图片底部间距 */
+    position: relative;
+    padding-top: 150%;
+    overflow: hidden;
+}
+
+.tale-image img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;    /* 保持图片比例并填充容器 */
+    object-position: center; /* 居中裁剪 */
+}
+
+.tale-card {
+    flex: 0 0 auto;
+    width: calc((100% - 4rem) / 3); /* 适应三个卡片的宽度 */
+    background-color: rgb(237, 236, 232);
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid rgb(98, 85, 72);
+    position: relative;  /* 添加相对定位 */
+    padding-bottom: 4rem;    /* 增加底部padding，给按钮留更多空间 */
+}
+
+.tale-grid.dragging {
+    cursor: grabbing;
+}
+
+/* 调整tale卡片中的按钮样式 */
+.tale-card .arrive-button {
+    padding: 0.6rem 3rem;     /* 增大按钮大小 */
+    font-size: 1.2rem;        /* 增大字体 */
+    letter-spacing: 2px;
+    position: absolute;
+    bottom: 1.5rem;          /* 上移按钮位置 */
+    font-weight: 500;        /* 稍微加粗字体 */
+}
+
+/* 保持原有的hero区域按钮样式不变 */
+.hero-content .arrive-button {
+    margin-top: 2rem;
+    padding: 0.6rem 4rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: 3px;
+}
+
+/* 响应式调整 */
+@media (max-width: 1400px) {
+    .tale-card {
+        flex: 0 0 calc((100vw - 4rem - 4rem) / 3);  /* 小于1400px时使用视窗宽度 */
+        width: calc((100vw - 4rem - 4rem) / 3);
+    }
+}
+
+/* 响应式设计补充 */
+@media (max-width: 768px) {
+    .tale-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .tale-header h2 {
+        font-size: 2.5rem;
+    }
+
+    .tale-line {
+        margin-top: 1.3rem;
+    }
+}
+
+/* Albums collected 部分样式 */
+.albums-section {
+    padding: 6rem 0;
+    background-color: rgb(237, 236, 232);
+}
+
+.albums-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.albums-header {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 2rem;
+}
+
+.albums-header h2 {
+    font-size: 3.5rem;
+    font-weight: 400;
+    color: rgb(98, 85, 72);
+    margin-right: 2rem;
+}
+
+.albums-line {
+    flex-grow: 1;
+    height: 2px;
+    background-color: rgb(98, 85, 72);
+    margin-top: 1.8rem;
+}
+
+.albums-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);  /* 3列 */
+    gap: 2rem;                              /* 间距 */
+    margin-top: 2rem;
+}
+
+.album-card {
+    aspect-ratio: 700/425;  /* 保持宽高比为700:425 */
+    overflow: hidden;
+    border: 1px solid rgb(98, 85, 72);
+    display: flex;          /* 添加flex布局 */
+    align-items: center;    /* 垂直居中 */
+    justify-content: center;/* 水平居中 */
+    background-color: rgb(237, 236, 232);  /* 设置背景色 */
+    padding: 1rem;         /* 添加内边距 */
+}
+
+.album-card img {
+    max-width: 100%;       /* 最大宽度100% */
+    max-height: 100%;      /* 最大高度100% */
+    width: auto;           /* 自动宽度 */
+    height: auto;          /* 自动高度 */
+    object-fit: contain;   /* 改为contain模式，确保图片完整显示 */
+    transition: transform 0.3s ease;
+}
+
+.album-card:hover img {
+    transform: scale(1.05);
+}
+
+/* 为特定的相册卡片添加粗边框 */
+.albums-grid .album-card:nth-child(4),  /* 第二行第一个 */
+.albums-grid .album-card:nth-child(10), /* 第四行第一个 */
+.albums-grid .album-card:nth-child(11)  /* 第四行第二个 */ {
+    border-width: 3px;  /* 增加边框粗细 */
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .albums-header h2 {
+        font-size: 2.5rem;
+    }
+
+    .albums-grid {
+        grid-template-columns: 1fr;  /* 在移动端改为单列 */
+        gap: 1rem;
+    }
+}
+
+/* 添加平滑滚动效果 */
+html {
+    scroll-behavior: smooth;
+}
+
+.carousel-container {
+    position: relative;
+    width: 100%;
+    margin: 40px auto;
+    overflow: hidden;  /* 确保内容不会溢出 */
+}
+
+.carousel-track-container {
+    overflow: hidden;
+    padding: 0 40px;
+}
+
+.carousel-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+}
+
+.carousel-slide {
+    /* 计算宽度：(容器宽度 - 2个间距) / 3 */
+    flex: 0 0 calc((100% - 40px) / 3);
+    margin: 0 10px;
+    position: relative;
+}
+
+.carousel-slide img {
+    width: 100%;
+    /* 高度设置为宽度的0.618倍 */
+    height: calc(((100vw - 40px) / 3) * 0.618);
+    object-fit: cover;
+    display: block;
+}
+
+.credit-link {
+    text-decoration: none;
+    color: white; /* 改为白色文字 */
+    display: block;
+    position: relative;
+}
+
+.credit-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* 半透明黑色背景 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+    font-size: 24px; /* 增加字体大小 */
+}
+
+.credit-link:hover .credit-overlay {
+    opacity: 1;
+}
+
+/* 移除原来的标题样式 */
+.carousel-slide h3 {
+    display: none;
+}
+
+/* 其他按钮样式保持不变 */
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: transparent;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    font-size: 20px;
+    box-shadow: none;
+    transition: background 0.3s;
+}
+
+.carousel-button:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+.prev {
+    left: 10px; /* 调整左侧按钮的位置 */
+}
+
+.next {
+    right: 20px; /* 调整右侧按钮的位置 */
+}
+
+/* Arrive页面样式 */
+.arrive-main {
+    padding-top: 80px; /* 为固定导航栏留出空间 */
+    min-height: calc(100vh - 80px);
+    background-color: rgb(237, 236, 232);
+}
+
+.arrive-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+.arrive-container h1 {
+    font-size: 3rem;
+    color: rgb(98, 85, 72);
+    margin-bottom: 2rem;
+} 
+
+/* 文件选择器样式 */
+.file-input-container {
+    text-align: center;
+    margin: 20px 0;
+    padding-top: 80px; /* 为导航栏留出空间 */
+}
+
+.file-input-label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: rgb(98, 85, 72);
+    color: white;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s;
+}
+
+.file-input-label:hover {
+    background-color: rgba(98, 85, 72, 0.8);
+}
+
+#folderInput {
+    display: none;
+}
+
+/* 照片网格样式 */
+.photo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 4px;
+    padding: 4px;
+}
+
+.photo-item {
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    overflow: hidden;
+}
+
+.photo-item img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.05);
+}
