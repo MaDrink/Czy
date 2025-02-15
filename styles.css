@@ -169,10 +169,6 @@ body {
         display: none;
     }
     
-    .menu-toggle {
-        display: block;
-    }
-    
     .hero-container {
         flex-direction: column;  /* 在移动端保持图片在上文字在下 */
         height: auto;
@@ -242,7 +238,7 @@ body {
 }
 
 .tale-container {
-    max-width: 1400px;
+    max-width: 1600px;
     margin: 0 auto;
     padding: 30px;
 }
@@ -460,6 +456,7 @@ html {
 
 .carousel-container {
     position: relative;
+    padding: 0 60px;
     width: 100%;
     margin: 40px auto;
     overflow: hidden;  /* 确保内容不会溢出 */
@@ -467,25 +464,27 @@ html {
 
 .carousel-track-container {
     overflow: hidden;
-    padding: 0 40px;
+    /*padding: 0 40px;*/
+    /*border: 2px solid blue;*/
 }
 
 .carousel-track {
     display: flex;
     transition: transform 0.3s ease-in-out;
+    /*border: 2px solid green;*/
+    width: fit-content;
+    gap: 10px;
 }
 
 .carousel-slide {
-    /* 计算宽度：(容器宽度 - 2个间距) / 3 */
-    flex: 0 0 calc((100% - 40px) / 3);
-    margin: 0 10px;
+    flex: 0 0 calc((100% - 20px) / 3);  /* 容器宽度减去两个间隙(5px * 2)后的三分之一 */
     position: relative;
 }
 
 .carousel-slide img {
     width: 100%;
     /* 高度设置为宽度的0.618倍 */
-    height: calc(((100vw - 40px) / 3) * 0.618);
+    height: calc(((100vw - 20px) / 3) * 0.618);
     object-fit: cover;
     display: block;
 }
@@ -547,8 +546,16 @@ html {
 }
 
 .next {
-    right: 20px; /* 调整右侧按钮的位置 */
+    right: 10px; /* 调整右侧按钮的位置 */
 }
+
+
+
+
+
+
+
+
 
 /* Arrive页面样式 */
 .arrive-main {
