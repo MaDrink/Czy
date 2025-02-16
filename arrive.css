@@ -1,0 +1,149 @@
+/* 重置样式 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    background-color: rgb(237, 236, 232);
+    color: rgb(98, 85, 72);
+}
+
+/* 导航栏样式 */
+.main-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    background: rgb(237, 236, 232);
+    border-bottom: 1px solid transparent;
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0.8rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+}
+
+/* 添加中间的横线 */
+.nav-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background-color: rgb(98, 85, 72);
+    z-index: 1;
+}
+
+.logo {
+    height: 50px;
+    display: flex;
+    align-items: center;
+    background-color: rgb(237, 236, 232);
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.logo img {
+    height: 100%;
+    width: auto;
+    transition: transform 0.3s ease;
+}
+
+.logo:hover img {
+    transform: scale(1.1);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background-color: rgb(237, 236, 232);
+    padding: 0 15px;
+    position: relative;
+    z-index: 2;
+}
+
+/* 返回按钮样式 */
+.back-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.3s;
+}
+
+.back-button:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.back-button svg {
+    color: #333;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .nav-links {
+        padding: 0 10px;
+    }
+}
+
+/* 不规则图片网格样式 */
+.photo-grid {
+    columns: 4;
+    column-gap: 15px;
+    padding: 80px 20px 20px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.photo-item {
+    break-inside: avoid;
+    margin-bottom: 15px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+}
+
+.photo-item img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.photo-item:hover img {
+    transform: scale(1.05);
+}
+
+/* 响应式调整 */
+@media (max-width: 1200px) {
+    .photo-grid {
+        columns: 3;
+    }
+}
+
+@media (max-width: 900px) {
+    .photo-grid {
+        columns: 2;
+    }
+}
+
+@media (max-width: 600px) {
+    .photo-grid {
+        columns: 1;
+    }
+}

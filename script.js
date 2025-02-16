@@ -20,36 +20,103 @@ document.addEventListener('DOMContentLoaded', function() {
     const prevButton = document.querySelector('.prev');
     
     let currentIndex = 0;
-    const slidesToShow = 3;
+    const slidesToShow = window.innerWidth <= 768 ? 1 : 3;  // 移动端显示1张，桌面端显示3张
     const slideWidth = slides[0].getBoundingClientRect().width;
+    const gap = window.innerWidth <= 768 ? 15 : 10;  // 移动端间距15px，桌面端10px
     
-    const gap = 10; // 设置间距为20px
-
-    // 设置slide位置，把每个slide的位置设置为：幻灯片的宽度乘以index 并转化成px单位
-    //slides.forEach((slide, index) => {
-        //slide.style.left = (slideWidth * index + gap * index) + 'px';
-    //}); 直接从css样式写入
-    // 设置幻灯片的容器移动到下一个幻灯片的函数 传入参数是一个索引
-    // 通过 style 属性可以动态地修改元素的 CSS 样式，transform 是 CSS 中的一个属性，用于对元素进行 2D 或 3D 变换，比如移动、旋转、缩放等
-    // 通过移动track来达到作品移动的目的，二者移动方向相反时效果相同
-    // 负值表示左移，translateX接收一个字符串参数(有效的 CSS 长度值（如像素 px、百分比 %、em 等)
-    // 反引号和${}表示模板字符串可以直接计算
-    // 注意，每次偏移量都是从初始值计算(偏移量不保存只用来显示页面)，所以左移多算一个长度，右移少算一个长度
-    const moveToSlide = (currentIndex) => {
-        track.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
+    // 更新活动幻灯片的样式
+    const updateActiveSlide = () => {
+        if (window.innerWidth <= 768) {
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                if (index === currentIndex) {
+                    slide.classList.add('active');
+                }
+            });
+        }
     };
-    // 给按钮添加移动到下一个幻灯片的事件，检测是否越界，计算应该的偏移量，进行偏移
+
+    const moveToSlide = (currentIndex) => {
+        if (window.innerWidth <= 768) {
+            // 移动端下的滑动逻辑
+            const slideAndGap = slideWidth + gap;
+            track.style.transform = `translateX(-${currentIndex * slideAndGap}px)`;
+            updateActiveSlide();
+        } else {
+            // 桌面端下的原有滑动逻辑
+            track.style.transform = `translateX(-${currentIndex * (slideWidth + gap)}px)`;
+        }
+    };
+
     nextButton.addEventListener('click', () => {
         if (currentIndex < slides.length - slidesToShow) {
             currentIndex++;
             moveToSlide(currentIndex);
         }
     });
-    // 给按钮添加移动到上一个幻灯片的事件
+
     prevButton.addEventListener('click', () => {
         if (currentIndex > 0) {
             currentIndex--;
             moveToSlide(currentIndex);
+        }
+    });
+
+    // 初始化活动幻灯片
+    updateActiveSlide();
+
+    // 监听窗口大小变化
+    window.addEventListener('resize', () => {
+        // 重新计算滑动距离并更新显示
+        moveToSlide(currentIndex);
+    });
+});
+
+// 汉堡菜单功能
+document.addEventListener('DOMContentLoaded', function() {
+    const hamburger = document.querySelector('.hamburger');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (hamburger && navLinks) {  // 确保元素存在
+        hamburger.addEventListener('click', function(e) {
+            e.preventDefault();  // 阻止默认行为
+            hamburger.classList.toggle('active');
+            navLinks.classList.toggle('active');
+            console.log('Hamburger clicked');  // 添加调试日志
+        });
+
+        // 点击导航链接后关闭菜单
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            });
+        });
+
+        // 点击页面其他地方关闭菜单
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !navLinks.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navLinks.classList.remove('active');
+            }
+        });
+    }
+});
+
+// 音乐播放控制
+document.addEventListener('DOMContentLoaded', function() {
+    const logo = document.querySelector('.logo');
+    const bgMusic = document.getElementById('bgMusic');
+    let isPlaying = false;
+
+    logo.addEventListener('click', function() {
+        if (!isPlaying) {
+            bgMusic.play();
+            isPlaying = true;
+        } else {
+            bgMusic.pause();
+            bgMusic.currentTime = 0; // 重置播放位置
+            isPlaying = false;
         }
     });
 }); 
